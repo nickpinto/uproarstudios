@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 2 110 108">
-  <rect x="-5" y="2" width="110" height="108" rx="24" fill="#0d0d0f"/>
   <g fill="none" stroke="#ff6a00" stroke-width="5" stroke-linecap="butt">
     <path d="M6 8 L6 60 A44 44 0 0 0 94 60 L94 8"/>
     <path d="M15 8 L15 60 A35 35 0 0 0 85 60 L85 8"/>

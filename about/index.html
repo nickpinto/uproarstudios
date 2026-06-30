@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Uproar Studios</title>
+  <meta name="description" content="Uproar Studios is a one-person studio run by Nick — a lifelong startup builder making beautiful, fun apps and games.">
+  <link rel="canonical" href="https://www.uproarstudios.ca/about/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About — Uproar Studios">
+  <meta property="og:description" content="A one-person studio making beautiful, fun apps and games. Hi, I'm Nick.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.uproarstudios.ca/about/">
+  <meta property="og:image" content="https://www.uproarstudios.ca/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Uproar Studios">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=JetBrains+Mono&family=Space+Grotesk:wght@400;500;600&display=swap">
+
+  <style>
+    :root {
+      --bg:       #0d0d0f;
+      --surface:  #15151a;
+      --surface2: #1a1a1f;
+      --ink:      #f0ece4;
+      --dim:      rgba(240,236,228,0.62);
+      --faint:    rgba(240,236,228,0.40);
+      --rule:     rgba(240,236,228,0.08);
+      --accent:   #ff6a00;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient glow top-right */
+    .glow {
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 680px; height: 680px;
+      background: radial-gradient(circle, rgba(255,106,0,.12) 0%, transparent 60%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ─────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 56px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      z-index: 5;
+    }
+    .logo-mark {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 18px; font-weight: 600; letter-spacing: .005em;
+      color: inherit; text-decoration: none;
+    }
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none; transition: color .2s;
+    }
+    .nav-link:hover { color: var(--ink); }
+
+    /* ── About ───────────────────────────────────── */
+    .about {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 56px 40px;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .headline {
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: .96;
+      letter-spacing: -.04em;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .cursive {
+      color: var(--accent);
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      font-size: 1.4em;
+      line-height: .85;
+    }
+
+    .lead {
+      font-size: clamp(20px, 2.6vw, 26px);
+      line-height: 1.45;
+      color: var(--ink);
+      max-width: 36ch;
+      margin-bottom: 40px;
+    }
+
+    .prose p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--dim);
+      margin-bottom: 22px;
+    }
+    .prose p strong { color: var(--ink); font-weight: 600; }
+    .prose .accent { color: var(--accent); }
+
+    .pull {
+      font-size: clamp(24px, 3.4vw, 34px);
+      line-height: 1.25;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      font-weight: 500;
+      margin: 40px 0;
+      padding-left: 22px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .signature {
+      margin-top: 36px;
+      font-family: 'Caveat', cursive;
+      font-size: 34px;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .signature span {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--faint);
+      margin-top: 8px;
+    }
+
+    /* ── CTA row ─────────────────────────────────── */
+    .cta-row {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      max-width: 760px; margin: 8px auto 0;
+      padding: 40px 56px 96px;
+      position: relative; z-index: 1;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      border-radius: 999px;
+      padding: 13px 24px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .2s, background .2s, border-color .2s;
+    }
+    .btn-primary {
+      background: var(--accent); color: #160a00;
+      box-shadow: 0 8px 24px rgba(255,106,0,.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,106,0,.34); }
+    .btn-ghost {
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+    .btn-ghost:hover { border-color: var(--dim); transform: translateY(-2px); }
+
+    /* Faint brand U behind content */
+    .mark-bg {
+      position: absolute;
+      right: -120px; top: 140px;
+      width: 520px; max-width: 60vw;
+      opacity: .06;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .mark-bg svg { width: 100%; height: auto; display: block; }
+
+    /* ── Footer ──────────────────────────────────── */
+    .site-footer {
+      padding: 22px 56px;
+      border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .06em; color: var(--faint);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      position: relative; z-index: 5;
+    }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { color: var(--faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--dim); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .about { padding: 56px 24px 28px; }
+      .cta-row { padding: 28px 24px 72px; }
+      .mark-bg { display: none; }
+      .site-footer { padding: 18px 24px; justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="mark-bg" aria-hidden="true">
+    <svg viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 8 L6 60 A44 44 0 0 0 94 60 L94 8"   stroke="#ff6a00" stroke-width="3.5"/>
+      <path d="M15 8 L15 60 A35 35 0 0 0 85 60 L85 8" stroke="#ff6a00" stroke-width="3.5"/>
+      <path d="M24 8 L24 60 A26 26 0 0 0 76 60 L76 8" stroke="#ff6a00" stroke-width="3.5"/>
+      <path d="M33 8 L33 60 A17 17 0 0 0 67 60 L67 8" stroke="#ff6a00" stroke-width="3.5"/>
+    </svg>
+  </div>
+
+  <nav>
+    <a class="logo-mark" href="/">
+      <svg width="32" height="34" viewBox="0 0 100 105" fill="none" aria-hidden="true">
+        <path d="M6 8 L6 60 A44 44 0 0 0 94 60 L94 8"   stroke="#ff6a00" stroke-width="3.5"/>
+        <path d="M15 8 L15 60 A35 35 0 0 0 85 60 L85 8" stroke="#ff6a00" stroke-width="3.5"/>
+        <path d="M24 8 L24 60 A26 26 0 0 0 76 60 L76 8" stroke="#ff6a00" stroke-width="3.5"/>
+        <path d="M33 8 L33 60 A17 17 0 0 0 67 60 L67 8" stroke="#ff6a00" stroke-width="3.5"/>
+      </svg>
+      <span>Uproar Studios</span>
+    </a>
+    <a class="nav-link" href="/#contact">Contact</a>
+  </nav>
+
+  <main class="about">
+    <div class="eyebrow">About</div>
+    <h1 class="headline">Hi — I'm <span class="cursive">Nick.</span></h1>
+    <p class="lead">Uproar Studios is a one-person studio.</p>
+
+    <div class="prose">
+      <p>
+        I've spent my whole career in tech startups — the fast, crazy,
+        mess around and find out. Somewhere along the way I figured out
+        that the part I love is <strong>building</strong>. Taking a rough
+        idea and shaping it into something real you can hold, tap, and
+        actually play with.
+      </p>
+
+      <p class="pull">Uproar Studios is how I get to do that — on my own terms.</p>
+
+      <p>
+        No committees. No compromises. No features bolted on to chase a metric.
+        Just small, carefully-made apps and games — the kind of thing I'd want
+        on my own phone, or on the table on a Friday night.
+        <strong>Say hi anytime — I read every message.</strong>
+      </p>
+
+      <div class="signature">
+        Nick
+        <span>Founder · Uproar Studios</span>
+      </div>
+    </div>
+  </main>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/#contact">Get in touch</a>
+    <a class="btn btn-ghost" href="/">See what I've built →</a>
+  </div>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Uproar Studios. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>

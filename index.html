@@ -93,6 +93,7 @@
       text-decoration: none;
     }
 
+    .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-link {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -475,7 +476,10 @@
         </svg>
         <span>Uproar Studios</span>
       </a>
-      <a class="nav-link" href="#contact">Contact</a>
+      <div class="nav-links">
+        <a class="nav-link" href="/about/">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </div>
     </nav>
 
     <!-- Hero -->
@@ -577,6 +581,7 @@
     <footer class="site-footer">
       <span>&copy; 2026 Uproar Studios. All rights reserved.</span>
       <div class="footer-links">
+        <a href="/about/">About</a>
         <a href="#contact">Contact</a>
       </div>
     </footer>

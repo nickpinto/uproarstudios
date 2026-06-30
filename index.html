@@ -36,18 +36,19 @@
       --surface2: #1a1a1f;
       --ink:      #f0ece4;
       --dim:      rgba(240,236,228,0.55);
-      --faint:    rgba(240,236,228,0.35);
+      --faint:    rgba(240,236,228,0.38);
       --rule:     rgba(240,236,228,0.08);
       --accent:   #ff6a00;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: 'Space Grotesk', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     .root {
@@ -74,6 +75,7 @@
     nav {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 18px 56px;
       border-bottom: 1px solid var(--rule);
       position: relative;
@@ -87,25 +89,45 @@
       font-size: 18px;
       font-weight: 600;
       letter-spacing: .005em;
+      color: inherit;
+      text-decoration: none;
     }
+
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--ink); }
 
     /* ── Hero ────────────────────────────────────── */
     .hero {
-      padding: 52px 56px 80px;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 64px;
-      align-items: end;
-      border-bottom: 1px solid var(--rule);
       position: relative;
+      padding: 84px 56px 92px;
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
       z-index: 5;
     }
 
+    .hero-text { position: relative; z-index: 2; max-width: 820px; }
+
     .headline {
-      font-size: clamp(56px, 7vw, 104px);
-      line-height: .94;
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: .92;
       letter-spacing: -.045em;
       font-weight: 500;
+    }
+
+    .sub {
+      margin-top: 30px;
+      font-size: 21px;
+      line-height: 1.5;
+      color: var(--dim);
+      max-width: 540px;
     }
 
     .cursive {
@@ -117,71 +139,112 @@
       line-height: .85;
     }
 
-    .sub {
-      font-size: 20px;
-      line-height: 1.5;
-      color: var(--dim);
-      max-width: 420px;
-      align-self: center;
+    /* Large brand U as hero anchor */
+    .hero-mark {
+      position: absolute;
+      right: -48px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 460px;
+      max-width: 42vw;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .92;
+      filter: drop-shadow(0 0 70px rgba(255,106,0,.28));
     }
+    .hero-mark svg { width: 100%; height: auto; display: block; }
 
-    /* ── Product cards ───────────────────────────── */
-    .products {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--rule);
-      flex: 1;
-      min-height: 460px;
-      position: relative;
-      z-index: 5;
-      margin-bottom: 28px;
+    /* ── Products (full-width stacked) ───────────── */
+    .products { position: relative; z-index: 5; }
+
+    .product {
+      padding: 60px 56px;
       border-bottom: 1px solid var(--rule);
-    }
-
-    .card {
       background: var(--surface);
-      padding: 24px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-decoration: none;
-      color: inherit;
-      transition: background .25s;
     }
 
-    .card:hover { background: var(--surface2); }
+    .product-inner { max-width: 1160px; margin: 0 auto; }
 
     .card-title {
-      font-size: 44px;
-      line-height: .96;
-      letter-spacing: -.03em;
+      font-size: clamp(40px, 5vw, 58px);
+      line-height: .98;
+      letter-spacing: -.035em;
       font-weight: 500;
     }
 
     .card-copy {
-      font-size: 13px;
-      line-height: 1.5;
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.55;
       color: var(--dim);
     }
 
     .visual-wrap {
-      flex: 1;
-      min-height: 170px;
+      margin-top: 30px;
+      min-height: 460px;
       background: var(--surface2);
       border: 1px solid var(--rule);
-      border-radius: 8px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      position: relative;
     }
 
+    /* subtle glow behind the screenshots */
+    .visual-wrap::after {
+      content: "";
+      position: absolute;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(255,106,0,.12) 0%, transparent 65%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    /* ── Phone screenshot fan ────────────────────── */
+    .shots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 22px 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shot {
+      width: 178px;
+      aspect-ratio: 1320 / 2868;
+      border-radius: 22px;
+      padding: 4px;
+      background: #000;
+      box-shadow:
+        0 18px 44px rgba(0,0,0,.55),
+        inset 0 0 0 1px rgba(255,255,255,.06);
+      flex: 0 0 auto;
+      transition: transform .3s ease;
+    }
+    .shot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+    }
+    .shot:nth-child(1) { transform: rotate(-7deg); margin-right: -22px; z-index: 1; }
+    .shot:nth-child(2) { transform: translateY(-16px); z-index: 3;
+      box-shadow: 0 24px 54px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.07), 0 0 60px rgba(255,106,0,.12); }
+    .shot:nth-child(3) { transform: rotate(7deg); margin-left: -22px; z-index: 2; }
+    .shot:hover { transform: translateY(-22px) rotate(0); z-index: 5; }
+
+    /* ── Card footer ─────────────────────────────── */
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 12px;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 18px;
       border-top: 1px solid var(--rule);
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -189,167 +252,211 @@
       text-transform: uppercase;
     }
 
-    .chips { display: flex; gap: 6px; color: var(--faint); }
-    .chip  { padding: 3px 9px; border: 1px solid var(--rule); border-radius: 999px; }
+    .footer-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .chip { padding: 3px 9px; border: 1px solid var(--rule); border-radius: 999px; color: var(--faint); }
 
-    .card-cta {
-      display: flex;
+    .mini-link {
+      color: var(--faint);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color .2s, border-color .2s;
+    }
+    .mini-link:hover { color: var(--dim); border-bottom-color: var(--dim); }
+
+    .cta-soon {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--accent);
+      padding: 5px 13px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      color: var(--dim);
+      white-space: nowrap;
     }
-
-    .arrow {
-      width: 22px; height: 22px;
+    .cta-soon .dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--accent);
-      color: var(--bg);
+      box-shadow: 0 0 9px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+    /* ── Chicken Wars card fan ───────────────────── */
+    .cards {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    /* ── Phone mockup ────────────────────────────── */
-    .phone {
-      width: 150px; height: 270px;
-      border-radius: 26px;
-      padding: 5px;
-      background: #000;
-      box-shadow:
-        0 18px 48px rgba(0,0,0,.5),
-        inset 0 0 0 1px rgba(255,255,255,.05),
-        0 0 50px rgba(255,106,0,.08);
-    }
-
-    .phone-inner {
-      width: 100%; height: 100%;
-      border-radius: 22px;
-      background: #0a0a0c;
-      display: flex;
-      flex-direction: column;
-      padding: 10px 8px;
-      overflow: hidden;
-    }
-
-    .phone-notch {
-      width: 50px; height: 13px;
-      background: #000;
-      border-radius: 999px;
-      align-self: center;
-      margin-bottom: 8px;
-    }
-
-    .phone-hud {
-      display: flex;
-      justify-content: space-between;
-      font-size: 8px;
-      color: var(--faint);
-      font-family: 'JetBrains Mono', monospace;
-      margin-bottom: 8px;
-      letter-spacing: .06em;
-    }
-
-    .hud-time { color: var(--accent); }
-
-    .mine-grid {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 1px;
-      flex: 1;
-    }
-
-    .mc {
-      border-radius: 1.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 7px;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-      background: #222226;
-    }
-
-    .mc.r  { background: #16161a; }
-    .mc.n1 { color: #aaa; }
-    .mc.n2 { color: #e8c547; }
-    .mc.n3 { color: var(--accent); }
-
-    /* ── Card game mockup ────────────────────────── */
-    .cards-wrap {
+      padding: 18px 12px;
       position: relative;
-      width: 240px;
-      height: 200px;
-    }
-
-    .pcard {
-      position: absolute;
-      left: 50%; top: 50%;
-      border-radius: 7px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .pcard-tag { font-size: 8px; letter-spacing: .14em; }
-    .pcard-sym { align-self: center; font-family: serif; line-height: 1; }
-    .pcard-val { align-self: flex-end; font-size: 12px; font-weight: 600; }
-
-    .pcard.dark {
-      width: 92px; height: 134px;
-      background: #0a0a0c;
-      color: var(--ink);
-      border: 1px solid var(--rule);
-      box-shadow: 0 6px 18px rgba(0,0,0,.4);
       z-index: 1;
     }
-    .pcard.dark .pcard-tag { opacity: .5; }
-    .pcard.dark .pcard-sym { font-size: 36px; }
-
-    .pcard.hot {
-      width: 110px; height: 152px;
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 12px 32px rgba(255,106,0,.33);
-      z-index: 3;
+    .gcard {
+      width: 210px;
+      aspect-ratio: 825 / 1125;
+      border-radius: 11px;
+      overflow: hidden;
+      background: #0a0a0c;
+      box-shadow:
+        0 14px 38px rgba(0,0,0,.5),
+        inset 0 0 0 1px rgba(255,255,255,.06);
+      flex: 0 0 auto;
+      transition: transform .3s ease;
     }
-    .pcard.hot .pcard-tag { opacity: .75; }
-    .pcard.hot .pcard-sym { font-size: 46px; }
+    .gcard img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gcard:nth-child(1) { transform: rotate(-13deg) translateY(12px); margin-right: -54px; z-index: 1; }
+    .gcard:nth-child(2) { transform: translateY(-14px); z-index: 3;
+      box-shadow: 0 22px 48px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.07), 0 0 54px rgba(255,106,0,.14); }
+    .gcard:nth-child(3) { transform: rotate(13deg) translateY(12px); margin-left: -54px; z-index: 2; }
+    .gcard:hover { transform: translateY(-18px) rotate(0); z-index: 5; }
+
+    /* ── Contact ─────────────────────────────────── */
+    .contact {
+      position: relative;
+      z-index: 5;
+      padding: 80px 56px 88px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .contact-inner { max-width: 680px; margin: 0 auto; }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .contact h2 {
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -.04em;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .contact-lead {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--dim);
+      max-width: 46ch;
+      margin-bottom: 36px;
+    }
+    .contact-lead a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .contact-lead a:hover { border-bottom-color: var(--accent); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 9px;
+      padding: 14px 16px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color .2s, background .2s;
+    }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--faint); }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--surface2);
+    }
+    .honey { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+
+    .send-btn {
+      align-self: flex-start;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #160a00;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s, opacity .2s;
+      box-shadow: 0 8px 24px rgba(255,106,0,.25);
+    }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,106,0,.34); }
+    .send-btn:disabled { opacity: .6; cursor: default; transform: none; box-shadow: none; }
+
+    .form-status {
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 1.2em;
+      margin-top: 2px;
+    }
+    .form-status.ok  { color: var(--accent); }
+    .form-status.err { color: #ff8a6a; }
+
+    /* ── Footer ──────────────────────────────────── */
+    .site-footer {
+      padding: 22px 56px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
+      color: var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 5;
+    }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { color: var(--faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--dim); }
 
     /* ── Mobile ──────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 16px 24px; }
 
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 40px 24px 32px;
+      .hero { padding: 48px 24px 40px; }
+      .hero-mark { display: none; }
+      .sub { font-size: 18px; margin-top: 22px; }
+
+      .product { padding: 44px 24px; }
+      .card-title { font-size: 38px; }
+      .card-title .cursive { display: block; }
+
+      .visual-wrap { min-height: 0; margin-top: 22px; }
+
+      /* Fan → swipeable filmstrip on mobile */
+      .shots {
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 18px 4px 22px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
       }
-
-      .sub { padding-bottom: 0; }
-
-      .products {
-        grid-template-columns: 1fr;
-        margin-bottom: 0;
+      .shot {
+        width: 168px;
+        transform: none !important;
+        margin: 0 !important;
+        scroll-snap-align: center;
       }
+      .shot:hover { transform: none !important; }
 
-      .site-footer { padding: 20px 24px; }
-    }
+      .cards { padding: 14px 4px; }
+      .gcard { width: 140px; }
 
-    /* ── Footer ──────────────────────────────────── */
-    .site-footer {
-      padding: 20px 56px;
-      border-top: 1px solid var(--rule);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: .06em;
-      color: var(--faint);
-      text-align: center;
-      position: relative;
-      z-index: 5;
+      .contact { padding: 56px 24px 64px; }
+      .field-row { grid-template-columns: 1fr; }
+
+      .site-footer { padding: 20px 24px; justify-content: center; text-align: center; }
     }
   </style>
 </head>
@@ -359,7 +466,7 @@
 
     <!-- Nav -->
     <nav>
-      <div class="logo-mark">
+      <a class="logo-mark" href="/">
         <svg width="32" height="34" viewBox="0 0 100 105" fill="none" aria-hidden="true">
           <path d="M6 8 L6 60 A44 44 0 0 0 94 60 L94 8"   stroke="#ff6a00" stroke-width="3.5"/>
           <path d="M15 8 L15 60 A35 35 0 0 0 85 60 L85 8" stroke="#ff6a00" stroke-width="3.5"/>
@@ -367,96 +474,156 @@
           <path d="M33 8 L33 60 A17 17 0 0 0 67 60 L67 8" stroke="#ff6a00" stroke-width="3.5"/>
         </svg>
         <span>Uproar Studios</span>
-      </div>
+      </a>
+      <a class="nav-link" href="#contact">Contact</a>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
-      <h1 class="headline">
-        Small studio,<br>
-        <span class="cursive">Big ideas.</span>
-      </h1>
-      <p class="sub">An independent maker of games, apps, and tools that make everyday things more delightful.</p>
+      <div class="hero-text">
+        <h1 class="headline">
+          Small studio,<br>
+          <span class="cursive">Big ideas.</span>
+        </h1>
+        <p class="sub">An independent maker of games, apps, and tools that make everyday things more delightful.</p>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 8 L6 60 A44 44 0 0 0 94 60 L94 8"   stroke="#ff6a00" stroke-width="3.5"/>
+          <path d="M15 8 L15 60 A35 35 0 0 0 85 60 L85 8" stroke="#ff6a00" stroke-width="3.5"/>
+          <path d="M24 8 L24 60 A26 26 0 0 0 76 60 L76 8" stroke="#ff6a00" stroke-width="3.5"/>
+          <path d="M33 8 L33 60 A17 17 0 0 0 67 60 L67 8" stroke="#ff6a00" stroke-width="3.5"/>
+        </svg>
+      </div>
     </section>
 
-    <!-- Product cards -->
+    <!-- Products -->
     <section class="products" aria-label="Our products">
-      <a href="#" class="card">
-        <h2 class="card-title">Minesweeper <span class="cursive">Reloaded.</span></h2>
-        <p class="card-copy">The classic, rebuilt for touch. Haptics, daily boards, themes that don't apologize.</p>
-        <div class="visual-wrap">
-          <div class="phone">
-            <div class="phone-inner">
-              <div class="phone-notch"></div>
-              <div class="phone-hud">
-                <span>⚑ 03</span>
-                <span class="hud-time">02:14</span>
-                <span>★ 1.2k</span>
-              </div>
-              <!-- 8×8 minesweeper grid: r=revealed, n1/n2/n3=number color -->
-              <div class="mine-grid">
-                <div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n1">1</div><div class="mc r n1">1</div><div class="mc r"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n2">2</div><div class="mc r n1">1</div><div class="mc r"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n3">3</div><div class="mc r"></div><div class="mc r n1">1</div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n2">2</div><div class="mc r"></div><div class="mc r n1">1</div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n2">2</div><div class="mc r"></div><div class="mc r"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc r n1">1</div><div class="mc r"></div><div class="mc r"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-                <div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div><div class="mc"></div>
-              </div>
+      <!-- Minesweeper -->
+      <article class="product">
+        <div class="product-inner">
+          <h2 class="card-title">Minesweeper <span class="cursive">Reloaded.</span></h2>
+          <p class="card-copy">The classic, reimagined for iPhone. Four game modes, eight themes, three difficulties — and not a single ad.</p>
+          <div class="visual-wrap">
+            <div class="shots">
+              <div class="shot"><img src="img/minesweeper/ms-01.jpg" alt="Minesweeper Reloaded — classic board" loading="lazy" width="349" height="760"></div>
+              <div class="shot"><img src="img/minesweeper/ms-04.jpg" alt="Minesweeper Reloaded — Perks mode" loading="lazy" width="349" height="760"></div>
+              <div class="shot"><img src="img/minesweeper/ms-05.jpg" alt="Minesweeper Reloaded — game mode picker" loading="lazy" width="349" height="760"></div>
             </div>
           </div>
-        </div>
-        <div class="card-footer">
-          <div class="chips">
-            <span class="chip">iPhone</span>
-            <span class="chip">iPad</span>
-          </div>
-          <div class="card-cta">
-            <span>App Store</span>
-            <span class="arrow">↗</span>
+          <div class="card-footer">
+            <div class="footer-left">
+              <a class="mini-link" href="/minesweeper/privacy/">Privacy</a>
+            </div>
+            <span class="cta-soon"><span class="dot"></span>Apple App Store · Coming Soon</span>
           </div>
         </div>
-      </a>
+      </article>
 
-      <a href="#" class="card">
-        <h2 class="card-title">Chicken <span class="cursive">Wars.</span></h2>
-        <p class="card-copy">A loud, bluff-heavy card game for 3–6 chaotic friends. Fifteen minutes. No survivors.</p>
-        <div class="visual-wrap">
-          <div class="cards-wrap">
-            <div class="pcard dark" style="transform:translate(calc(-50% - 65px),-50%) rotate(-14deg)">
-              <span class="pcard-tag">PECK</span>
-              <span class="pcard-sym">♣</span>
-              <span class="pcard-val">07</span>
+      <!-- Chicken Wars -->
+      <article class="product">
+        <div class="product-inner">
+          <h2 class="card-title">Chicken <span class="cursive">Wars.</span></h2>
+          <p class="card-copy">Four chicken factions clash for the crown. Win the battles, claim the rewards, and lead your flock to total chicken domination.</p>
+          <div class="visual-wrap">
+            <div class="cards">
+              <div class="gcard"><img src="img/chicken-wars/cw-back.jpg" alt="Chicken Wars — Army card back" loading="lazy" width="410" height="560"></div>
+              <div class="gcard"><img src="img/chicken-wars/cw-royalty.jpg" alt="Chicken Wars — King Cluck card" loading="lazy" width="410" height="560"></div>
+              <div class="gcard"><img src="img/chicken-wars/cw-mage.jpg" alt="Chicken Wars — McBane McCluck card" loading="lazy" width="410" height="560"></div>
             </div>
-            <div class="pcard hot" style="transform:translate(calc(-50% - 8px),-50%) rotate(-2deg)">
-              <span class="pcard-tag">BRAWL</span>
-              <span class="pcard-sym">♠</span>
-              <span class="pcard-val">11</span>
+          </div>
+          <div class="card-footer">
+            <div class="footer-left">
+              <span class="chip">Card game</span>
+              <span class="chip">2–4 players</span>
             </div>
-            <div class="pcard dark" style="transform:translate(calc(-50% + 56px),-50%) rotate(12deg)">
-              <span class="pcard-tag">WILD</span>
-              <span class="pcard-sym">♦</span>
-              <span class="pcard-val">03</span>
-            </div>
+            <span class="cta-soon"><span class="dot"></span>Shop · Coming Soon</span>
           </div>
         </div>
-        <div class="card-footer">
-          <div class="chips">
-            <span class="chip">3–6 players</span>
-            <span class="chip">15 min</span>
+      </article>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="contact-inner">
+        <div class="eyebrow">Get in touch</div>
+        <h2>Say hello.</h2>
+        <p class="contact-lead">
+          Questions, ideas, bug reports, or just want to chat? Drop us a line — we read every message.
+          Or email us directly at <a href="mailto:hello@uproarstudios.ca">hello@uproarstudios.ca</a>.
+        </p>
+
+        <form class="contact-form" id="contact-form"
+              action="https://formsubmit.co/hello@uproarstudios.ca" method="POST">
+          <div class="field-row">
+            <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+            <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
           </div>
-          <div class="card-cta">
-            <span>Visit site</span>
-            <span class="arrow">↗</span>
-          </div>
-        </div>
-      </a>
+          <textarea name="message" placeholder="What's on your mind?" required></textarea>
+
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="New message from uproarstudios.ca">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- honeypot: bots fill this, humans don't -->
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <button type="submit" class="send-btn">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </section>
 
     <footer class="site-footer">
-      &copy; 2026 Uproar Studios. All rights reserved.
+      <span>&copy; 2026 Uproar Studios. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#contact">Contact</a>
+      </div>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      var status = form.querySelector('.form-status');
+      var btn = form.querySelector('.send-btn');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Honeypot tripped — silently pretend success.
+        if (form.querySelector('[name=_honey]').value) { return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        status.className = 'form-status';
+        status.textContent = '';
+
+        var payload = {};
+        new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+        fetch('https://formsubmit.co/ajax/hello@uproarstudios.ca', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error((res.d && res.d.message) || 'Failed');
+          form.reset();
+          status.className = 'form-status ok';
+          status.textContent = "Thanks — your message is on its way. We'll be in touch soon.";
+        })
+        .catch(function () {
+          status.className = 'form-status err';
+          status.innerHTML = "Hmm, that didn't send. Email us directly at <a href=\"mailto:hello@uproarstudios.ca\" style=\"color:inherit\">hello@uproarstudios.ca</a>.";
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send message';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

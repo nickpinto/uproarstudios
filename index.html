@@ -283,6 +283,24 @@
     }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
 
+    /* Live App Store CTA */
+    .cta-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #160a00;
+      text-decoration: none;
+      white-space: nowrap;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(255,106,0,.25);
+      transition: transform .15s ease, box-shadow .2s;
+    }
+    .cta-live:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,106,0,.36); }
+    .cta-live .cta-arrow { font-size: 12px; }
+
     /* ── Chicken Wars card fan ───────────────────── */
     .cards {
       display: flex;
@@ -519,7 +537,7 @@
             <div class="footer-left">
               <a class="mini-link" href="/minesweeper/privacy/">Privacy</a>
             </div>
-            <span class="cta-soon"><span class="dot"></span>Apple App Store · Coming Soon</span>
+            <a class="cta-live" href="https://apps.apple.com/ca/app/minesweeper-reloaded/id6761346134" target="_blank" rel="noopener">Download on the App Store <span class="cta-arrow">↗</span></a>
           </div>
         </div>
       </article>
